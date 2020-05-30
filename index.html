@@ -6,6 +6,7 @@
         <div id="app">
             {{ message }}
             <span v-if="seen">You cannot see.</span>
+            <button v-on:click="reverseMessage">Reverse message</button>
             <ol>
                 <li v-for="todo in todos">
                     {{ todo.text }}
