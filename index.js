@@ -10,3 +10,5 @@ var app = new Vue({
         ]
     }
 });
+
+app.todos.push({ text: "New item"})
