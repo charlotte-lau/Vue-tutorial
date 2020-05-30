@@ -5,6 +5,7 @@
     <body>
         <div id="app">
             {{ message }}
+            <input v-model="message">
             <span v-if="seen">You cannot see.</span>
             <button v-on:click="reverseMessage">Reverse message</button>
             <ol>
