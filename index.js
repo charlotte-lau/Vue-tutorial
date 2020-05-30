@@ -1,12 +1,17 @@
+Vue.component('todo-item', {
+    props: ['todo'],
+    template: '<li>{{ todo.text }}</li>'
+})
+
 var app = new Vue({
     el: "#app",
     data: {
         message: "Hello Vue!",
         seen: false,
         todos: [
-            {text: "Learn JavaScript"},
-            {text: "Learn Vue"},
-            {text: "Become a web developer"}
+            {id:0, text: "Learn JavaScript"},
+            {id:1, text: "Learn Vue"},
+            {id:2, text: "Become a web developer"}
         ]
     },
     methods: {
@@ -15,5 +20,3 @@ var app = new Vue({
         }
     }
 });
-
-app.todos.push({ text: "New item"})
