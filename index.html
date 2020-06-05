@@ -1,18 +1,20 @@
 <html>
     <head>
         <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <title>Product App</title>
+        <link rel="stylesheet" type="text/css" href="main.css">
     </head>
     <body>
+        <div class="nav-bar"></div>
         <div id="app">
-            {{ message }}
-            <input v-model="message">
-            <span v-if="seen">You cannot see.</span>
-            <button v-on:click="reverseMessage">Reverse message</button>
-            <ol>
-                <todo-item v-for="item in todos"
-                v-bind:todo="item"
-                v-bind:key="item.id"></todo-item>
-            </ol>
+            <div class="product">
+                <div class="product-image">
+                    <img :src="product.image"/>
+                </div>
+                <div class="product-info">
+                    <h1>{{ product.title }}</h1>
+                </div>
+            </div>
         </div>
         <script src="index.js"></script>
     </body>
