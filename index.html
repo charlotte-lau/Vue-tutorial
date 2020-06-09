@@ -13,6 +13,13 @@
                 </div>
                 <div class="product-info">
                     <h1>{{ product.title }}</h1>
+                    <p v-if="product.inventory > 10">In Stock</p>
+                    <p v-else-if="product.inventory <= 10 && product.inventory >0 ">Almost sold out!</p>
+                    <p v-else>Out of Stock</p>
+
+                    <ul>
+                        <li v-for="detail in product.details">{{ detail }}</li>
+                    </ul>
                 </div>
             </div>
         </div>

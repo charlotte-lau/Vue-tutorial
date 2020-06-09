@@ -10,12 +10,13 @@ var app = new Vue({
                     "20% polyester",
                     "Gender-neutral",
                 ],
-                stocks: [
+                variants: [
                     {color:"green", quantity:1, thumbnail:""},
                     {color:"blue", quantity:0, thumbnail:""},
                 ],
                 image:"./assets/vmSocks-green.jpg",
-                altTxt: "pair of socks"
+                altTxt: "pair of socks",
+                inventory: 100
             }
         
     }
