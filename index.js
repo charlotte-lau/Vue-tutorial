@@ -11,8 +11,8 @@ var app = new Vue({
                     "Gender-neutral",
                 ],
                 variants: [
-                    {color:"green", quantity:1, thumbnail:""},
-                    {color:"blue", quantity:0, thumbnail:""},
+                    {color:"green", quantity:1, thumbnail:"./assets/vmSocks-green.jpg", id: 2234},
+                    {color:"blue", quantity:0, thumbnail:"./assets/vmSocks-blue.jpg", id: 2235},
                 ],
                 image:"./assets/vmSocks-green.jpg",
                 altTxt: "pair of socks",
