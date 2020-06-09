@@ -17,7 +17,15 @@ var app = new Vue({
                 image:"./assets/vmSocks-green.jpg",
                 altTxt: "pair of socks",
                 inventory: 100
-            }
-        
+            },
+            cart: 0
+    },
+    methods: {
+        addToCart:function() {
+            this.cart +=  1;
+        },
+        updateProduct:function(variantImage) {
+            this.product.image = variantImage;
+        }
     }
 });
