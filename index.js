@@ -27,6 +27,13 @@ Vue.component('product-review', {
                 <option>1</option>
             </select>
         </p>
+        <p>
+            <p>Would you like to recommend this product? </p>
+            <label for="radio-yes">Yes</label>
+            <input type="radio" id="radio-yes" name="recommend" v-model="recommend" value="yes">
+            <label for="radio-no">No</label>
+            <input type="radio" id="radio-no" name="recommend" v-model="recommend" value="no">
+        </p>
         <input type="submit" value="Submit">
     </form>
     `,
@@ -35,27 +42,32 @@ Vue.component('product-review', {
             name: null,
             rating: null,
             review: null,
+            recommend: null,
             errors: []
         }
     },
     methods: {
         onSubmit: function () {
-            if (this.name && this.review && this.rating){
+            this.errors = [];
+            if (this.name && this.review && this.rating && this.recommend) {
                 let productReview = {
                     name: this.name,
                     rating: this.rating,
-                    review: this.review
+                    review: this.review,
+                    recommend: this.recommend
                 }
                 this.$emit('product-review', productReview);
                 this.name = null;
                 this.rating = null;
-                this.review = null; 
-            }else {
+                this.review = null;
+                this.recommend = null;
+            } else {
                 if (!this.name) this.errors.push("Name Required");
                 if (!this.review) this.errors.push("Review Required");
                 if (!this.rating) this.errors.push("Rating Required");
+                if (!this.recommend) this.errors.push("Recommend Required");
             }
-            
+
 
         }
     }
@@ -98,6 +110,18 @@ Vue.component('product', {
             </div>
             <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock}">Add to
                 cart</button>
+        </div>
+        <div>
+            <h2>Reivews:</h2>
+            <p v-if="reviews.length === 0">There is no reviews yet.</p> 
+            <ul>
+                <li v-for="review in reviews">
+                    <p>{{ review.name }}</p>
+                    <p>{{ review.review }}</p>
+                    <p>Rating: {{ review.rating }}</p>
+                    <p>{{ review.name + " " + (review.recommend==="yes"?"would":"wouldn't") + " like to recommend this product."}}</p>
+                </li>
+            </ul>
         </div>
         <product-review @product-review="addToReview"></product-review>
     </div>`,
