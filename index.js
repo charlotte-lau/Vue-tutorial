@@ -1,4 +1,52 @@
+Vue.component('product-review', {
+    template: `
+    <form class="review-form" @submit.prevent="onSubmit">
+        <p>
+            <label for="name">Name: </label>
+            <input id="name" v-model="name">
+        </p>
+        <p>
+            <label for="review">Review: </label>
+            <textarea id="review" v-model="review"></textarea>
+        </p>
+        <p>
+            <label for="rating">Rating: </label>
+            <select id="rating" v-model.number="rating">
+                <option>5</option>
+                <option>4</option>
+                <option>3</option>
+                <option>2</option>
+                <option>1</option>
+            </select>
+        </p>
+        <input type="submit" value="Submit">
+    </form>
+    `,
+    data: function () {
+        return {
+            name: null,
+            rating: null,
+            review: null
+        }
+    },
+    methods: {
+        onSubmit: function () {
+            if (this.name && this.review && this.rating){
+                let productReview = {
+                    name: this.name,
+                    rating: this.rating,
+                    review: this.review
+                }
+                this.$emit('product-review', productReview);
+                this.name = null;
+                this.rating = null;
+                this.review = null; 
+            }
+            
 
+        }
+    }
+});
 
 Vue.component('product-details', {
     props: {
@@ -37,10 +85,8 @@ Vue.component('product', {
             </div>
             <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock}">Add to
                 cart</button>
-            <div class="cart">
-                <p>Cart ({{ cart }})</p>
-            </div>
         </div>
+        <product-review @product-review="addToReview"></product-review>
     </div>`,
     data: function () {
         return {
@@ -72,9 +118,8 @@ Vue.component('product', {
                 ],
                 altTxt: "pair of socks",
                 inventory: 100
-
             },
-            cart: 0
+            reviews: []
         }
     },
     computed: {
@@ -93,10 +138,13 @@ Vue.component('product', {
     },
     methods: {
         addToCart: function () {
-            this.cart += 1;
+            this.$emit('add-to-cart', this.product.variants[this.selectedVariant].id);
         },
         updateProduct: function (index) {
             this.selectedVariant = index;
+        },
+        addToReview: function (review) {
+            this.reviews.push(review);
         }
     }
 })
@@ -104,6 +152,12 @@ Vue.component('product', {
 var app = new Vue({
     el: "#app",
     data: {
-        premium: true
+        premium: true,
+        cart: []
+    },
+    methods: {
+        updateCart: function (id) {
+            this.cart.push(id);
+        }
     }
 });
