@@ -110,6 +110,8 @@ Vue.component('product', {
             </div>
             <button v-on:click="addToCart" :disabled="!inStock" :class="{ disabledButton: !inStock}">Add to
                 cart</button>
+                
+            <button v-on:click="removeFromCart">Remove from cart</button>
         </div>
         <div>
             <h2>Reivews:</h2>
@@ -177,6 +179,9 @@ Vue.component('product', {
         addToCart: function () {
             this.$emit('add-to-cart', this.product.variants[this.selectedVariant].id);
         },
+        removeFromCart: function () {
+            this.$emit('remove-from-cart', this.product.variants[this.selectedVariant].id);
+        },
         updateProduct: function (index) {
             this.selectedVariant = index;
         },
@@ -195,6 +200,13 @@ var app = new Vue({
     methods: {
         updateCart: function (id) {
             this.cart.push(id);
+        },
+        removeItem: function (id) {
+            this.cart.forEach((item, index) => {
+                if (item === id) {
+                    this.cart.splice(index, 1);
+                }
+            });
         }
     }
 });
